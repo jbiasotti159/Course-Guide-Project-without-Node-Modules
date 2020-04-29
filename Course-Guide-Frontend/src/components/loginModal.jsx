@@ -18,7 +18,7 @@ const LoginModal = (props) => {
         <Modal.Header>
           <Modal.Title>Sign In</Modal.Title>
           <buttonClose
-            class="close1"
+            className="close1"
             data-dismiss="modal"
             onClick={props.handleModalOpen}
           >
@@ -27,7 +27,7 @@ const LoginModal = (props) => {
         </Modal.Header>
         <Modal.Body>
           <div className="container">
-            <LoginForm />
+            <LoginForm user={props.user} />
           </div>
         </Modal.Body>
       </Modal>

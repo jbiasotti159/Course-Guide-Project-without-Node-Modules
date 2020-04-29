@@ -9,6 +9,16 @@ var Verify = require("./verify");
 var passport = require("passport");
 const bcrypt = require("bcrypt");
 //Users/ : get and post
+
+usersRouter.get("/logout", (req, res) => {
+  //req.session.reset();
+  req.logout();
+  console.log("trying to log out");
+  res.status(200).json({
+    status: "Bye!",
+  });
+});
+
 usersRouter
   .route("/")
   .get(
@@ -128,16 +138,15 @@ usersRouter
 
 usersRouter.post("/register", async function (req, res) {
   users.register(
-    new users({ username: req.body.username }),
+    new users({
+      username: req.body.username,
+      fName: req.body.fName,
+      lName: req.body.lName,
+    }),
     req.body.password,
     function (err, user) {
       if (err) return res.status(500).json({ err: err });
-      if (req.body.fName) {
-        user.fName = req.body.fName;
-      }
-      if (req.body.lName) {
-        user.lName = req.body.lName;
-      }
+
       passport.authenticate("local")(req, res, function () {
         var token = Verify.getToken(user);
 
@@ -145,7 +154,7 @@ usersRouter.post("/register", async function (req, res) {
           .status(200)
           .header("x-access-token", token)
           .header("access-control-expose-headers", "x-access-token")
-          .json({ status: "Registration Successful !" });
+          .json({ status: "Registration Successful!" });
       });
     }
   );
@@ -177,11 +186,5 @@ usersRouter.post("/login", (req, res, next) => {
 });
 
 // 5- implementing logout
-usersRouter.get("/logout", function (req, res) {
-  req.logout();
-  res.status(200).json({
-    status: "Bye!",
-  });
-});
 
 module.exports = usersRouter;

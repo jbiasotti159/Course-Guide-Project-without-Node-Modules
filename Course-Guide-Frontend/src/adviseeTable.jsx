@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import AdviseeTableBody from "./components/adviseeTableBody";
 import AdviseeTableHead from "./components/adviseeTableHead";
-import { getAdvisees } from "./service/tempAdvisees";
-//import { getAdvisees } from "./service/advisorService"; needs userId from login if advisor
+//import { getAdvisees } from "./service/tempAdvisees";
+import { getAdvisees } from "./service/userService";
 
 class AdviseeTable extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.user);
 
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -16,7 +17,13 @@ class AdviseeTable extends Component {
     query: "",
   };
   componentDidMount() {
-    this.setState({ advisees: getAdvisees() });
+    const { user } = this.props;
+    var userId = user._doc._id;
+    console.log(userId);
+    console.log(getAdvisees(userId));
+    this.setState({ advisees: getAdvisees(userId) });
+
+    console.log(this.state);
   }
   handleSearch = (event) => {
     this.setState({ query: event.target.value });

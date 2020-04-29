@@ -5,8 +5,6 @@ const AdviseeTableHead = () => {
       <tr>
         <th>Last Name</th>
         <th>First Name</th>
-        <th>Email</th>
-        <th>Student ID</th>
       </tr>
     </thead>
   );

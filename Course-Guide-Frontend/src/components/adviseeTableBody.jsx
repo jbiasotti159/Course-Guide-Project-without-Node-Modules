@@ -11,12 +11,12 @@ class AdviseeTableBody extends Component {
           <tr key={index}>
             <td>{advisee.lName}</td>
             <td>{advisee.fName}</td>
-            <td>
+            {/* <td>
               <a href={"mailto:" + advisee.email}> {advisee.email} </a>{" "}
             </td>
             <td>
               <Link to={`/student`}> {advisee.studentID} </Link>
-            </td>
+            </td> */}
           </tr>
         ))}
       </tbody>

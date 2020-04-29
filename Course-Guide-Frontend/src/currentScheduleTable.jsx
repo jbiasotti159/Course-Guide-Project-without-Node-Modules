@@ -7,7 +7,7 @@ import "./css/CourseSelection.css";
 class CurrentScheduleTable extends Component {
   constructor(props) {
     super(props);
-
+    console.log(props);
     this.handleSearch = this.handleSearch.bind(this);
   }
   state = {
@@ -16,7 +16,10 @@ class CurrentScheduleTable extends Component {
   };
   async componentDidMount() {
     console.log("componentDidMount");
-    const { data } = await getSchedule();
+    const { user } = this.props;
+    const userId = user._doc._id;
+    console.log(userId);
+    const { data } = await getSchedule(userId);
     console.log("retrieve courses" + data);
     this.setState({ courses: data });
   }

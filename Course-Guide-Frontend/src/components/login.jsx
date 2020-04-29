@@ -5,6 +5,10 @@ import logo from "../img/Logo.png";
 import LoginModal from "./loginModal.jsx";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props.user);
+  }
   state = {
     account: {
       username: "",
@@ -37,6 +41,7 @@ class Login extends Component {
   };
 
   render() {
+    const { user } = this.props;
     return (
       <div>
         <div>
@@ -117,6 +122,7 @@ class Login extends Component {
         <LoginModal
           modalOpen={this.state.modalOpen}
           handleModalOpen={this.handleModalOpen}
+          user={user}
         />
       </div>
     );

@@ -6,14 +6,19 @@ import Footer from "./components/footer.jsx";
 import CurrentScheduleTable from "./currentScheduleTable";
 
 class StudentHome extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
   render() {
+    const { user } = this.props;
     return (
       <React.Fragment>
         <Header />
         <StudentNavBar />
         <StudentInfo />
         <h3 style={{ textAlign: "center" }}>Current Schedule</h3>
-        <CurrentScheduleTable />
+        <CurrentScheduleTable user={user} />
         <Footer />
       </React.Fragment>
     );
